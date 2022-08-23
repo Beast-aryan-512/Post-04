@@ -1,0 +1,10 @@
+<fieldset>
+	<p class="navbar-text float-right">
+		<legend><h1 align ="center">Hello User</h1></legend>
+		<--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+		<% if user_signed_in? %>
+		Logged in as <strong><%= current_user.email %></strong><br><br>
+		<%= button_to "All Post", blogs_path, method: :get %>
+		<%end%>
+	</p>
+</fieldset>

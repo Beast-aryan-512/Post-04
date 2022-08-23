@@ -1,0 +1,15 @@
+<%= form_with model: Comment.new, local: false, id: "new_comment",url: comments_path, html: {method: :post} do |form|%>
+
+<div class="field">
+	<%= form.label :body %>
+	<%= form.text_field :body %>
+</div><br>
+
+
+<%= form.hidden_field :blog_id, value: @blog.id %>
+<%= form.hidden_field :user_id, value: current_user.id %>
+
+<div>
+	<%= form.submit %>
+</div>
+<%end%>

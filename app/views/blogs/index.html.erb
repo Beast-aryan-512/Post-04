@@ -1,0 +1,62 @@
+<fieldset>
+  <p id="notice"><%= notice %></p>
+
+  <h1>All Blogs</h1>
+
+  <table class="table">
+    <thead class="table-primary"> 
+      <tr>
+        <th>Name</th>
+        <th>Discription</th>
+        <th></th>
+        <th>Status</th>
+        <th colspan="3"></th>
+        <th></th><th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody class="table-success">
+      <% if user_signed_in? %>
+        <% @blogs.each do |blog|%>
+        <tr>
+          <%if blog.approve %>
+            <td><%= blog.name %></td>
+            <td><%= blog.description%></td>
+            <%if current_user.has_role? :admin%>
+              <td><%=blog.approve%></td>
+              <td><%= button_to "Unapprove", blog_unapprove_path(blog), remote: true %></td>
+            <%end%>
+          <%else%>
+          <% if blog.user_id == current_user.id or current_user.has_role? :admin %>
+            <td class = "text-danger">(<%= blog.name %>)->Blog Not Approve</td>
+            <td><%= blog.description%></td>
+            <%if current_user.has_role? :admin%>
+              <td><%=blog.approve%></td>
+              <td><%= button_to "Approve", blog_approve_path(blog), remote: true %></td>
+            <%end%>
+          <%end%>
+          <%end%>
+          <% if blog.approve%>
+            <td><%= button_to "Show", blog , method: :get %></td>
+          <%end%>
+        </tr>
+        <%end%>
+      <%end%>
+  </tbody>
+</table>
+
+  <br>
+
+<%= link_to "New Blog", new_blog_path %>
+<br>
+<%= link_to "Back", root_path%>
+</fieldset>
+
+
+
+
+
+
+
+
+
